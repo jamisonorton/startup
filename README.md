@@ -15,4 +15,4 @@ I would like to create a website for my wife's piano lessons business. Outlined 
 
 ## Example home page
 
-![Home_page] (./home_page.png)
+![Home_page](https://github.com/jamisonorton/startup/blob/main/home_page.png)
