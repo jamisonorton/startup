@@ -13,6 +13,8 @@ I would like to create a website for my wife's piano lessons business. Outlined 
 - **Database data**: We will have a database containing the books that are recommended to students based off of years of playing.
 - **WebSocket data**: We will want a way to update students with important information so push notifications will be used for new messages or critical events such as needing to miss a day of appointments.
 
-## Example home page
+## Example Home Page
 
 ![Home_page](https://github.com/jamisonorton/startup/blob/main/home_page.png)
+
+## Example Calendar Page
