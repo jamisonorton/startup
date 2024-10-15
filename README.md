@@ -19,4 +19,6 @@ I would like to create a website for my wife's piano lessons business. Outlined 
 
 ## Startup HTML Deliverable
 
-- **Simon** - I have copied the simon-html directory into my startup repository. I have also copied the deployFiles.sh script into my startup directory and used it to compy all of my html pages to my aws server.
+- **Simon** - I have copied the simon-html directory into my startup repository. I have also copied the deployFiles.sh script into my startup directory and used it to copy all of my html pages to my aws server.
+- **Github** - I have also linked my github repository in the body of my index page so it is the 2nd thing you can read. I plan on adding this lower on the page in the footer section later.
+- **Startup** - I have added several landing pages and included them in an unorginized list. They will eventually be fixed with the css when I get to it for a proper navbar.
