@@ -29,4 +29,4 @@ I would like to create a website for my wife's piano lessons business. Outlined 
 - **3rd_party_calls** - I have included on which page I will be calling 3rd party services.
 - **Login** - I have created a login page with placeholders for email and password. This will get stored in a different database than the book list.
 - **Database** - I have included a bookList.html page that will show the books assigned to each child. This will update based off teaching level assigned by the teacher.
-- **Websocket** - I have included on the index.html where my websocket will go to show realtime communication.
+- **Websocket** - I have included on the index.html and calendar.html where my websocket will go to show realtime communication.
