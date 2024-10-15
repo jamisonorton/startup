@@ -21,6 +21,12 @@ I would like to create a website for my wife's piano lessons business. Outlined 
 
 - **Simon** - I have copied the simon-html directory into my startup repository. I have also copied the deployFiles.sh script into my startup directory and used it to copy all of my html pages to my aws server.
 - **Github** - I have also linked my github repository in the body of my index page so it is the 2nd thing you can read. I plan on adding this lower on the page in the footer section later. I have also committed over several days to show that I have ownership of my code to avoid rejection of my submission.
-- **Startup** - I have added several landing pages and included them in an unorginized list. They will eventually be fixed with the css when I get to it for a proper navbar.
-- **HTML_Pages** - I have included 4 html pages. The homepage, about, calendar, and login pages. These will be used as the main landing pages on my application.
-- **HTML_Tags** - I have included all of the required HTML tags
+- **Startup** - I have added several landing pages and included them in an unorganized list. They will eventually be fixed with the css when I get to it for a proper navbar.
+- **HTML_Pages** - I have included 3 html pages. The homepage, payment, calendar, and login pages. These will be used as the main landing pages on my application.
+- **HTML_Tags** - I have included all of the required HTML tags. I put the nav tag in the header and a h1 tag on each page to show what page you are on.
+- **HTML_links** - I have made the navbar link to each of the pages that I have in my app. This takes you to the pages you click on. On each page I have included a body with a header to show which page you are on.
+- **App_Context** - I have included some context for what each page will be used for
+- **3rd_party_calls** - I have included on which page I will be calling 3rd party services.
+- **Login** - I have created a login page with placeholders for email and password. This will get stored in a different database than the book list.
+- **Database** - I have included a bookList.html page that will show the books assigned to each child. This will update based off teaching level assigned by the teacher.
+- **Websocket** - I have included on the index.html where my websocket will go to show realtime communication.
