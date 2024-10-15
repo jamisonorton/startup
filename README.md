@@ -17,4 +17,6 @@ I would like to create a website for my wife's piano lessons business. Outlined 
 
 ![Home_page](https://github.com/jamisonorton/startup/blob/main/home_page.png)
 
-## Example Calendar Page
+## Startup HTML Deliverable
+
+- **Simon** - I have copied the simon-html directory into my startup repository. I have also copied the deployFiles.sh script into my startup directory and used it to compy all of my html pages to my aws server.
