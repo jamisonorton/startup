@@ -77,6 +77,12 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
+          <Button as={Link} color="primary" href="#" variant="flat">
+            Login
+          </Button>
+          <Button as={Link} color="primary" href="#" variant="flat">
+            Sign Up
+          </Button>
           <Link isExternal href={siteConfig.links.github} title="GitHub">
             <GithubIcon className="text-default-500" />
           </Link>

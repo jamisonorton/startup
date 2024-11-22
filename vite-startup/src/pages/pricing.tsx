@@ -8,6 +8,14 @@ export default function DocsPage() {
         <div className="inline-block max-w-lg text-center justify-center">
           <h1 className={title()}>Pricing</h1>
         </div>
+        <div className="inline-block max-w-lg text-center justify-center">
+          <p>
+            I offer lessons in a semester basis. This means you sign up for 12
+            lessons in a 14 week span. Each lesson is 30 minutes long and costs
+            $20/lesson. However, I require you to pay the entire month
+            in-advance.
+          </p>
+        </div>
       </section>
     </DefaultLayout>
   );

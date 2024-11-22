@@ -12,10 +12,10 @@ export const siteConfig = {
       label: "About",
       href: "/about",
     },
-    {
-      label: "Docs",
-      href: "/docs",
-    },
+    // {
+    //   label: "Docs",
+    //   href: "/docs",
+    // },
     {
       label: "Blog",
       href: "/blog",
@@ -61,6 +61,5 @@ export const siteConfig = {
   ],
   links: {
     github: "https://github.com/jamisonorton/startup",
-    docs: "https://nextui.org",
   },
 };
