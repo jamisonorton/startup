@@ -1,31 +1,12 @@
 import { Button } from "@nextui-org/button";
-// import { Kbd } from "@nextui-org/kbd";
 import { Link } from "@nextui-org/link";
-// import { Input } from "@nextui-org/input";
-import { Divider } from "@nextui-org/divider";
-import { MailIcon } from "./MailIcon.jsx";
-import { LockIcon } from "./";
 import {
   Navbar as NextUINavbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
   NavbarMenuToggle,
-  // NavbarMenu,
-  // NavbarMenuItem,
 } from "@nextui-org/navbar";
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  // Button,
-  useDisclosure,
-  Checkbox,
-  Input,
-  // Link,
-} from "@nextui-org/modal";
 import { link as linkStyles } from "@nextui-org/theme";
 import clsx from "clsx";
 
@@ -35,28 +16,6 @@ import { GithubIcon } from "@/components/icons";
 import { Logo } from "@/components/icons";
 
 export const Navbar = () => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  // const searchInput = (
-  //   <Input
-  //     aria-label="Search"
-  //     classNames={{
-  //       inputWrapper: "bg-default-100",
-  //       input: "text-sm",
-  //     }}
-  //     endContent={
-  //       <Kbd className="hidden lg:inline-block" keys={["command"]}>
-  //         K
-  //       </Kbd>
-  //     }
-  //     labelPlacement="outside"
-  //     placeholder="Search..."
-  //     startContent={
-  //       <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-  //     }
-  //     type="search"
-  //   />
-  // );
-
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -93,66 +52,9 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
-          <>
-            <Button onPress={onOpen} color="primary">
-              Open Modal
-            </Button>
-            <Modal
-              isOpen={isOpen}
-              onOpenChange={onOpenChange}
-              placement="top-center"
-            >
-              <ModalContent>
-                {(onClose) => (
-                  <>
-                    <ModalHeader className="flex flex-col gap-1">
-                      Log in
-                    </ModalHeader>
-                    <ModalBody>
-                      <Input
-                        autoFocus
-                        endContent={
-                          <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                        }
-                        label="Email"
-                        placeholder="Enter your email"
-                        variant="bordered"
-                      />
-                      <Input
-                        endContent={
-                          <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                        }
-                        label="Password"
-                        placeholder="Enter your password"
-                        type="password"
-                        variant="bordered"
-                      />
-                      <div className="flex py-2 px-1 justify-between">
-                        <Checkbox
-                          classNames={{
-                            label: "text-small",
-                          }}
-                        >
-                          Remember me
-                        </Checkbox>
-                        <Link color="primary" href="#" size="sm">
-                          Forgot password?
-                        </Link>
-                      </div>
-                    </ModalBody>
-                    <ModalFooter>
-                      <Button color="danger" variant="flat" onPress={onClose}>
-                        Close
-                      </Button>
-                      <Button color="primary" onPress={onClose}>
-                        Sign in
-                      </Button>
-                    </ModalFooter>
-                  </>
-                )}
-              </ModalContent>
-            </Modal>
-          </>
+          <Button as={Link} color="primary" href="/login" variant="flat">
+            Login
+          </Button>
           <Button as={Link} color="primary" href="#" variant="flat">
             Sign Up
           </Button>
@@ -167,29 +69,6 @@ export const Navbar = () => {
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
-
-      {/* <NavbarMenu>
-        {searchInput}
-        <div className="mx-4 mt-2 flex flex-col gap-2">
-          {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
-                }
-                href="#"
-                size="lg"
-              >
-                {item.label}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-        </div>
-      </NavbarMenu> */}
     </NextUINavbar>
   );
 };
