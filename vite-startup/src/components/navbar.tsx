@@ -77,7 +77,7 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button as={Link} color="primary" href="/login" variant="flat">
             Login
           </Button>
           <Button as={Link} color="primary" href="#" variant="flat">
