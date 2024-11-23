@@ -1,4 +1,6 @@
 import { Link } from "@nextui-org/link";
+import { siteConfig } from "@/config/site";
+import { GithubIcon } from "@/components/icons";
 
 import { Navbar } from "@/components/navbar";
 
@@ -14,14 +16,8 @@ export default function DefaultLayout({
         {children}
       </main>
       <footer className="w-full flex items-center justify-center py-3">
-        <Link
-          isExternal
-          className="flex items-center gap-1 text-current"
-          href="https://github.com/jamisonorton/startup"
-          title="Jamison's Discord"
-        >
-          <span className="text-default-600">Link to Jamison's</span>
-          <p className="text-primary">Discord</p>
+        <Link isExternal href={siteConfig.links.github} title="GitHub">
+          <GithubIcon className="text-default-1000" />
         </Link>
       </footer>
     </div>
