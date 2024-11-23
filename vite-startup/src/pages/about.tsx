@@ -1,15 +1,17 @@
-import { title } from "@/components/primitives";
 import { Image } from "@nextui-org/image";
-import DefaultLayout from "@/layouts/default";
 
+import DefaultLayout from "@/layouts/default";
+import { title } from "@/components/primitives";
 import familyPhoto from "@/photos/family.jpg";
+import huckPhoto from "@/photos/huck.jpg";
+import lunaPhoto from "@/photos/luna.jpg";
 
 export default function DocsPage() {
   return (
     <DefaultLayout>
       <section className="flex flex-row items-left justify-center gap-4 py-8 md:py-10">
         <div className="grow-0 inline-block max-w-lg text-center justify-center">
-          <Image width={600} alt="Family Photo" src={familyPhoto} />
+          <Image alt="Family Photo" src={familyPhoto} width={600} />
         </div>
         <div className="flex flex-col grow-0 inline-block max-w-lg text-center justify-start">
           <h1 className={title()}>About</h1>
@@ -26,6 +28,9 @@ export default function DocsPage() {
             full-time to focus on my family I have felt the itch to begin
             teaching again.
           </p>
+          <Image alt="Luna Photo" src={lunaPhoto} width={600} />
+          <br />
+          <Image alt="Huck Photo" src={huckPhoto} width={600} />
         </div>
       </section>
     </DefaultLayout>
