@@ -1,5 +1,5 @@
-import { Button } from "@nextui-org/button";
-import { Link } from "@nextui-org/link";
+// import { Button } from "@nextui-org/button";
+// import { Link } from "@nextui-org/link";
 import {
   Navbar as NextUINavbar,
   NavbarBrand,
@@ -23,11 +23,11 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  // Button,
+  Button,
   useDisclosure,
   Checkbox,
   Input,
-  // Link,
+  Link,
 } from "@nextui-org/modal";
 
 export const Navbar = () => {
