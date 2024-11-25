@@ -12,13 +12,13 @@ export const siteConfig = {
       label: "About",
       href: "/about",
     },
+    // {
+    //   label: "Docs",
+    //   href: "/docs",
+    // },
     {
-      label: "Docs",
-      href: "/docs",
-    },
-    {
-      label: "Blog",
-      href: "/blog",
+      label: "Calendar",
+      href: "/calendar",
     },
     {
       label: "Pricing",
