@@ -1,5 +1,7 @@
-// import { Button } from "@nextui-org/button";
-// import { Link } from "@nextui-org/link";
+import { Button } from "@nextui-org/button";
+import { Link } from "@nextui-org/link";
+import { Checkbox } from "@nextui-org/checkbox";
+import { Input } from "@nextui-org/input";
 import {
   Navbar as NextUINavbar,
   NavbarBrand,
@@ -7,15 +9,6 @@ import {
   NavbarItem,
   NavbarMenuToggle,
 } from "@nextui-org/navbar";
-import { link as linkStyles } from "@nextui-org/theme";
-import clsx from "clsx";
-
-import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
-import { GithubIcon } from "@/components/icons";
-import { Logo } from "@/components/icons";
-import { MailIcon } from "@/components/icons";
-import { LockIcon } from "@/components/icons";
 
 import {
   Modal,
@@ -23,15 +16,32 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button,
   useDisclosure,
-  Checkbox,
-  Input,
-  Link,
 } from "@nextui-org/modal";
 
+import { link as linkStyles } from "@nextui-org/theme";
+import clsx from "clsx";
+
+import { siteConfig } from "@/config/site";
+import { ThemeSwitch } from "@/components/theme-switch";
+import { GithubIcon } from "@/components/icons";
+import { Logo } from "@/components/icons";
+
+import { MailIcon } from "@/components/icons";
+import { LockIcon } from "@/components/icons";
+
 export const Navbar = () => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {
+    isOpen: isOpenLogin,
+    onOpen: onOpenLogin,
+    onOpenChange: onOpenChangeLogin,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenSignup,
+    onOpen: onOpenSignup,
+    onOpenChange: onOpenChangeSignup,
+  } = useDisclosure();
 
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
@@ -69,17 +79,13 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
-          <Button as={Link} color="primary" href="/login" variant="flat">
-            Login
-          </Button>
-
           <>
-            <Button onPress={onOpen} color="primary">
-              Open Modal
+            <Button onPress={onOpenLogin} color="primary" variant="flat">
+              Login
             </Button>
             <Modal
-              isOpen={isOpen}
-              onOpenChange={onOpenChange}
+              isOpen={isOpenLogin}
+              onOpenChange={onOpenChangeLogin}
               placement="top-center"
             >
               <ModalContent>
@@ -90,7 +96,6 @@ export const Navbar = () => {
                     </ModalHeader>
                     <ModalBody>
                       <Input
-                        autoFocus
                         endContent={
                           <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                         }
@@ -134,9 +139,44 @@ export const Navbar = () => {
             </Modal>
           </>
 
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
+          <>
+            <Button onPress={onOpenSignup} color="primary" variant="flat">
+              Sign Up
+            </Button>
+            <Modal
+              isOpen={isOpenSignup}
+              onOpenChange={onOpenChangeSignup}
+              placement="top-center"
+            >
+              <ModalContent>
+                {(onClose) => (
+                  <>
+                    <ModalHeader className="flex flex-col gap-1">
+                      Sign Up
+                    </ModalHeader>
+                    <ModalBody>
+                      <Input
+                        endContent={
+                          <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                        }
+                        label="Email"
+                        placeholder="Enter your email"
+                        variant="bordered"
+                      />
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="danger" variant="flat" onPress={onClose}>
+                        Close
+                      </Button>
+                      <Button color="primary" onPress={onClose}>
+                        Sign Up
+                      </Button>
+                    </ModalFooter>
+                  </>
+                )}
+              </ModalContent>
+            </Modal>
+          </>
           <ThemeSwitch />
         </NavbarItem>
       </NavbarContent>
