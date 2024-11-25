@@ -1,36 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>Jane's Music School</title>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="calendar.html">Calendar</a></li>
-        <li><a href="payment.html">Payment</a></li>
-        <li><a href="bookList.html">Book List</a></li>
-      </ul>
-    </nav>
-    <button type="button">Login</button>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jane's Piano Studio</title>
+    <meta key="title" content="Vite + NextUI" property="og:title" />
+    <meta
+      content="Make beautiful websites regardless of your design experience."
+      property="og:description"
+    />
+    <meta
+      content="Make beautiful websites regardless of your design experience."
+      name="description"
+    />
+    <meta
+      key="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      name="viewport"
+    />
+    <link href="/piano.png" rel="icon" type="image/x-icon" />
   </head>
-
   <body>
-    <h1>This is the index page</h1>
-    <p>
-      I will have some introductory information for the homepage here like a
-      photo of the teacher and an about us paragraph. I have included a login
-      button to maybe implement that button for the login page redirect
-    </p>
-    <p>
-      This is where my <b>websocket</b> will go as I want it to display
-      important notifications on the page. But I also want it to email these
-      push notifications to the parents so they know of any schedule changes.
-    </p>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
-
-  <footer>
-    <h1>This is a footer</h1>
-    <a href="https://github.com/jamisonorton/startup">Link to my GitHub</a>
-  </footer>
 </html>
