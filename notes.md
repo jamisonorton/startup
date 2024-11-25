@@ -13,3 +13,9 @@ I have created many websites in the past but mostly I use plain HTML and CSS to 
 # Notes for HTML deliverable
 
 Creating basic webpages is pretty easy. I am excited to start working on the css to make it a bit more readable and pretty. I also have a question about if I can use next.js instead of react to quickly implement routers and to focus my learning and engineering on the technology that I plan on using for my department.
+
+# Notes for using the deployReact script.
+
+for deploying simon use the script while in the simon-react directory then specify simon for the -s flag.
+
+for deploying startup make sure the name of the directory for the react app is called startup and use the -s startup flag.
