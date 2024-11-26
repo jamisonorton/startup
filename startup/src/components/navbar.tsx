@@ -25,7 +25,7 @@ import { PianoIcon } from "@/components/icons";
 import { MailIcon } from "@/components/icons";
 import { LockIcon } from "@/components/icons";
 
-export const NavbarItems = () => {
+export const Navbar = () => {
   const {
     isOpen: isOpenLogin,
     onOpen: onOpenLogin,
