@@ -44,15 +44,6 @@ export const Navbar = () => {
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const menuItems = [
-    "Home",
-    "About",
-    "Calendar",
-    "Pricing",
-    "Login",
-    "Sign Up",
-  ];
-
   return (
     <NextUINavbar
       maxWidth="xl"
