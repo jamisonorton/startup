@@ -7,9 +7,7 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenuToggle,
 } from "@nextui-org/navbar";
-
 import {
   Modal,
   ModalContent,
@@ -18,19 +16,16 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@nextui-org/modal";
-
 import { link as linkStyles } from "@nextui-org/theme";
 import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import { GithubIcon } from "@/components/icons";
-import { Logo } from "@/components/icons";
-
+import { PianoIcon } from "@/components/icons";
 import { MailIcon } from "@/components/icons";
 import { LockIcon } from "@/components/icons";
 
-export const Navbar = () => {
+export const NavbarItems = () => {
   const {
     isOpen: isOpenLogin,
     onOpen: onOpenLogin,
@@ -44,7 +39,7 @@ export const Navbar = () => {
   } = useDisclosure();
 
   return (
-    <NextUINavbar maxWidth="xl" position="sticky">
+    <NextUINavbar maxWidth="xl" position="static">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
           <Link
@@ -52,8 +47,7 @@ export const Navbar = () => {
             color="foreground"
             href="/"
           >
-            <Logo />
-            <p className="font-bold text-inherit">JPS</p>
+            <PianoIcon />
           </Link>
         </NavbarBrand>
         <div className="hidden lg:flex gap-4 justify-start ml-2">
@@ -80,13 +74,13 @@ export const Navbar = () => {
       >
         <NavbarItem className="hidden sm:flex gap-2">
           <>
-            <Button onPress={onOpenLogin} color="primary" variant="flat">
+            <Button color="primary" variant="flat" onPress={onOpenLogin}>
               Login
             </Button>
             <Modal
               isOpen={isOpenLogin}
-              onOpenChange={onOpenChangeLogin}
               placement="top-center"
+              onOpenChange={onOpenChangeLogin}
             >
               <ModalContent>
                 {(onClose) => (
@@ -140,13 +134,13 @@ export const Navbar = () => {
           </>
 
           <>
-            <Button onPress={onOpenSignup} color="primary" variant="flat">
+            <Button color="primary" variant="flat" onPress={onOpenSignup}>
               Sign Up
             </Button>
             <Modal
               isOpen={isOpenSignup}
-              onOpenChange={onOpenChangeSignup}
               placement="top-center"
+              onOpenChange={onOpenChangeSignup}
             >
               <ModalContent>
                 {(onClose) => (
@@ -179,14 +173,6 @@ export const Navbar = () => {
           </>
           <ThemeSwitch />
         </NavbarItem>
-      </NavbarContent>
-
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link isExternal href={siteConfig.links.github}>
-          <GithubIcon className="text-default-500" />
-        </Link>
-        <ThemeSwitch />
-        <NavbarMenuToggle />
       </NavbarContent>
     </NextUINavbar>
   );
