@@ -4,10 +4,10 @@ export const siteConfig = {
   name: "Vite + NextUI",
   description: "Make beautiful websites regardless of your design experience.",
   navItems: [
-    {
-      label: "Home",
-      href: "/",
-    },
+    // {
+    //   label: "Home",
+    //   href: "/",
+    // },
     {
       label: "About",
       href: "/about",
@@ -17,12 +17,12 @@ export const siteConfig = {
     //   href: "/docs",
     // },
     {
-      label: "Calendar",
-      href: "/calendar",
-    },
-    {
       label: "Pricing",
       href: "/pricing",
+    },
+    {
+      label: "Calendar",
+      href: "/calendar",
     },
   ],
   navMenuItems: [
@@ -38,10 +38,10 @@ export const siteConfig = {
       label: "About",
       href: "/about",
     },
-    // {
-    //   label: "Docs",
-    //   href: "/docs",
-    // },
+    {
+      label: "Docs",
+      href: "/docs",
+    },
     {
       label: "Calendar",
       href: "/calendar",

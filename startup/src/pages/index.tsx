@@ -1,7 +1,7 @@
-import { title } from "@/components/primitives";
 import { Image } from "@nextui-org/image";
-import DefaultLayout from "@/layouts/default";
 
+import { title } from "@/components/primitives";
+import DefaultLayout from "@/layouts/default";
 import pianoPhoto from "@/photos/piano.jpg";
 
 export default function IndexPage() {
@@ -11,7 +11,7 @@ export default function IndexPage() {
         <div className="grow-0 inline-block max-w-lg text-center justify-center">
           <Image alt="Family Photo" src={pianoPhoto} width={800} />
         </div>
-        <div className="flex flex-col grow-0 inline-block max-w-lg text-center justify-start">
+        <div className="flex flex-col grow-0 max-w-lg text-center justify-start">
           <h1 className={title()}>
             This is the home page for Jane's Piano School Website.
           </h1>
