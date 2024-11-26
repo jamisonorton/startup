@@ -98,11 +98,8 @@ export const Navbar = () => {
         ))}
       </NavbarMenu>
 
-      <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
-        justify="end"
-      >
-        <NavbarItem className="hidden sm:flex gap-2">
+      <NavbarContent className="sm:flex basis-1/5 sm:basis-full" justify="end">
+        <NavbarItem className="sm:flex gap-2">
           <>
             <Button color="primary" variant="flat" onPress={onOpenLogin}>
               Login
