@@ -1,3 +1,4 @@
+import React from "react";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import { Checkbox } from "@nextui-org/checkbox";
@@ -7,6 +8,9 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
 } from "@nextui-org/navbar";
 import {
   Modal,
@@ -38,9 +42,28 @@ export const Navbar = () => {
     onOpenChange: onOpenChangeSignup,
   } = useDisclosure();
 
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const menuItems = [
+    "Home",
+    "About",
+    "Calendar",
+    "Pricing",
+    "Login",
+    "Sign Up",
+  ];
+
   return (
-    <NextUINavbar maxWidth="xl" position="static">
+    <NextUINavbar
+      maxWidth="xl"
+      position="static"
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
         <NavbarBrand className="gap-3 max-w-fit">
           <Link
             className="flex justify-start items-center gap-1"
@@ -67,6 +90,22 @@ export const Navbar = () => {
           ))}
         </div>
       </NavbarContent>
+      <NavbarMenu>
+        {siteConfig.navItems.map((item) => (
+          <NavbarMenuItem key={item.href}>
+            <Link
+              className={clsx(
+                linkStyles({ color: "foreground" }),
+                "data-[active=true]:text-primary data-[active=true]:font-medium"
+              )}
+              color="foreground"
+              href={item.href}
+            >
+              {item.label}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
 
       <NavbarContent
         className="hidden sm:flex basis-1/5 sm:basis-full"
