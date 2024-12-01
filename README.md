@@ -30,3 +30,13 @@ I would like to create a website for my wife's piano lessons business. Outlined 
 - **Login** - I have created a login page with placeholders for email and password. This will get stored in a different database than the book list.
 - **Database** - I have included a bookList.html page that will show the books assigned to each child. This will update based off teaching level assigned by the teacher.
 - **Websocket** - I have included on the index.html and calendar.html where my websocket will go to show realtime communication.
+
+## Startup CSS Deliverable
+
+I added css to make the pages look good. Mostly used tailwind to apply the styles rather than bootstrap so my site doesn't look like a standard bootstrap website. I also used NextUI for the buttons and components to make those look great.
+
+## Startup React Deliverable.
+
+I used a startup React with Vite site then added NextUI to add the components. React Router is used to go between pages. There are multiple react components to mock login, signup, I used hooks to create modals for these actions. I also have added a Calendly calendar signup in the calendar page. I want to also add the Google Calendar API to show the teachers availability and have it look better by taking up the whole page rather than a "cell phone" portion. I have also added images and descriptions in each page.
+
+I will work later on setting up the login and signup functionality.
