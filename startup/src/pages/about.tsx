@@ -2,9 +2,10 @@ import { Image } from "@nextui-org/image";
 
 import DefaultLayout from "@/layouts/default";
 import { title } from "@/components/primitives";
-import familyPhoto from "@/photos/family.jpg";
-import huckPhoto from "@/photos/huck.jpg";
-import lunaPhoto from "@/photos/luna.jpg";
+
+import familyPhoto from "/family.jpg";
+import huckPhoto from "/huck.jpg";
+import lunaPhoto from "/luna.jpg";
 
 export default function DocsPage() {
   return (

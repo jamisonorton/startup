@@ -2,7 +2,8 @@ import { Image } from "@nextui-org/image";
 
 import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
-import pianoPhoto from "@/photos/piano.jpg";
+
+import pianoPhoto from "/piano.jpg";
 
 export default function IndexPage() {
   return (
