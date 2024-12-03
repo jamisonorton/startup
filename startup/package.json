@@ -2,15 +2,17 @@
   "name": "vite-template",
   "private": true,
   "version": "0.0.0",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint -c .eslintrc.json ./src/**/**/*.{ts,tsx} --fix",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "nodemon service/index.js"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
+    "@google-cloud/local-auth": "^2.1.0",
     "@nextui-org/button": "2.0.38",
     "@nextui-org/checkbox": "^2.1.5",
     "@nextui-org/code": "2.0.33",
@@ -26,16 +28,21 @@
     "@nextui-org/system": "2.2.6",
     "@nextui-org/theme": "2.2.11",
     "@react-aria/visually-hidden": "3.8.12",
+    "axios": "^1.7.8",
     "clsx": "2.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "framer-motion": "~11.1.1",
+    "googleapis": "^105.0.0",
     "mongodb": "^6.11.0",
+    "mongoose": "^8.8.3",
     "react": "18.3.1",
     "react-calendly": "^4.3.1",
     "react-dom": "18.3.1",
     "react-router-dom": "6.23.0",
     "tailwind-variants": "0.1.20",
-    "tailwindcss": "3.4.3"
+    "tailwindcss": "3.4.3",
+    "vite-express": "^0.20.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",

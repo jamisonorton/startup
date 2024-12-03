@@ -22,6 +22,7 @@ import {
 } from "@nextui-org/modal";
 import { link as linkStyles } from "@nextui-org/theme";
 import clsx from "clsx";
+import axios from "axios";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
