@@ -1,11 +1,14 @@
 import { Route, Routes } from "react-router-dom";
+import axios from "axios";
 
 import IndexPage from "@/pages/index";
 import AboutPage from "@/pages/about";
 import DocsPage from "@/pages/docs";
 import CalendarPage from "@/pages/calendar";
 import PricingPage from "@/pages/pricing";
-import LoginPage from "@/pages/login";
+
+axios.defaults.baseURL = "https://localhost:4000";
+axios.defaults.withCredentials = true;
 
 function App() {
   return (
@@ -15,7 +18,6 @@ function App() {
       <Route element={<DocsPage />} path="/docs" />
       <Route element={<CalendarPage />} path="/calendar" />
       <Route element={<PricingPage />} path="/pricing" />
-      <Route element={<LoginPage />} path="/login" />
     </Routes>
   );
 }

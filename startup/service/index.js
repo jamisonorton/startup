@@ -4,11 +4,9 @@ import ViteExpress from "vite-express";
 // import cors from "cors";
 
 const app = express();
-
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 //Middleware
-app.use("/", require("./routes/authRoute"));
 
 // mongo connection
 // mongoose.Promise = global.Promise;

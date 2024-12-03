@@ -1,7 +1,7 @@
 import React from "react";
+import { useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
-import { Checkbox } from "@nextui-org/checkbox";
 import { Input } from "@nextui-org/input";
 import {
   Navbar as NextUINavbar,
@@ -44,6 +44,20 @@ export const Navbar = () => {
   } = useDisclosure();
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const registerUser = (e) => {
+    e.preventDefault();
+  };
+
+  const loginUser = (e) => {
+    e.preventDefualt();
+    axios.get("/");
+  };
+
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
 
   return (
     <NextUINavbar
@@ -109,6 +123,7 @@ export const Navbar = () => {
               isOpen={isOpenLogin}
               placement="top-center"
               onOpenChange={onOpenChangeLogin}
+              onSubmit={loginUser}
             >
               <ModalContent>
                 {(onClose) => (
@@ -123,7 +138,12 @@ export const Navbar = () => {
                         }
                         label="Email"
                         placeholder="Enter your email"
+                        type="email"
+                        value={data.email}
                         variant="bordered"
+                        onChange={(e) =>
+                          setData({ ...data, email: e.target.value })
+                        }
                       />
                       <Input
                         endContent={
@@ -132,26 +152,18 @@ export const Navbar = () => {
                         label="Password"
                         placeholder="Enter your password"
                         type="password"
+                        value={data.password}
                         variant="bordered"
+                        onChange={(e) =>
+                          setData({ ...data, password: e.target.value })
+                        }
                       />
-                      <div className="flex py-2 px-1 justify-between">
-                        <Checkbox
-                          classNames={{
-                            label: "text-small",
-                          }}
-                        >
-                          Remember me
-                        </Checkbox>
-                        <Link color="primary" href="#" size="sm">
-                          Forgot password?
-                        </Link>
-                      </div>
                     </ModalBody>
                     <ModalFooter>
                       <Button color="danger" variant="flat" onPress={onClose}>
                         Close
                       </Button>
-                      <Button color="primary" onPress={onClose}>
+                      <Button color="primary" type="submit" onPress={onClose}>
                         Sign in
                       </Button>
                     </ModalFooter>
@@ -169,6 +181,7 @@ export const Navbar = () => {
               isOpen={isOpenSignup}
               placement="top-center"
               onOpenChange={onOpenChangeSignup}
+              onSubmit={registerUser}
             >
               <ModalContent>
                 {(onClose) => (
@@ -183,14 +196,32 @@ export const Navbar = () => {
                         }
                         label="Email"
                         placeholder="Enter your email"
+                        type="email"
+                        value={data.email}
                         variant="bordered"
+                        onChange={(e) =>
+                          setData({ ...data, email: e.target.value })
+                        }
+                      />
+                      <Input
+                        endContent={
+                          <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                        }
+                        label="Password"
+                        placeholder="Enter your password"
+                        type="password"
+                        value={data.password}
+                        variant="bordered"
+                        onChange={(e) =>
+                          setData({ ...data, password: e.target.value })
+                        }
                       />
                     </ModalBody>
                     <ModalFooter>
                       <Button color="danger" variant="flat" onPress={onClose}>
                         Close
                       </Button>
-                      <Button color="primary" onPress={onClose}>
+                      <Button color="primary" type="submit" onPress={onClose}>
                         Sign Up
                       </Button>
                     </ModalFooter>
