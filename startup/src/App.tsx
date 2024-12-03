@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
 import axios from "axios";
 
 import IndexPage from "@/pages/index";
@@ -7,10 +8,16 @@ import DocsPage from "@/pages/docs";
 import CalendarPage from "@/pages/calendar";
 import PricingPage from "@/pages/pricing";
 
-axios.defaults.baseURL = "https://localhost:4000";
-axios.defaults.withCredentials = true;
-
 function App() {
+  const fetchAPI = async () => {
+    const response = await axios.get("http://localhost:4000/api");
+    console.log(response.data.fruits);
+  };
+
+  useEffect(() => {
+    fetchAPI();
+  }, []);
+
   return (
     <Routes>
       <Route element={<IndexPage />} path="/" />

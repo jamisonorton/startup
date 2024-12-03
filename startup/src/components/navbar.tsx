@@ -123,7 +123,6 @@ export const Navbar = () => {
               isOpen={isOpenLogin}
               placement="top-center"
               onOpenChange={onOpenChangeLogin}
-              onSubmit={loginUser}
             >
               <ModalContent>
                 {(onClose) => (
@@ -163,7 +162,12 @@ export const Navbar = () => {
                       <Button color="danger" variant="flat" onPress={onClose}>
                         Close
                       </Button>
-                      <Button color="primary" type="submit" onPress={onClose}>
+                      <Button
+                        color="primary"
+                        type="submit"
+                        // onPress={onClose}
+                        onSubmit={loginUser}
+                      >
                         Sign in
                       </Button>
                     </ModalFooter>
@@ -181,7 +185,6 @@ export const Navbar = () => {
               isOpen={isOpenSignup}
               placement="top-center"
               onOpenChange={onOpenChangeSignup}
-              onSubmit={registerUser}
             >
               <ModalContent>
                 {(onClose) => (
@@ -221,7 +224,12 @@ export const Navbar = () => {
                       <Button color="danger" variant="flat" onPress={onClose}>
                         Close
                       </Button>
-                      <Button color="primary" type="submit" onPress={onClose}>
+                      <Button
+                        color="primary"
+                        type="submit"
+                        // onPress={onClose}
+                        onSubmit={registerUser}
+                      >
                         Sign Up
                       </Button>
                     </ModalFooter>

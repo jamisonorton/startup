@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint -c .eslintrc.json ./src/**/**/*.{ts,tsx} --fix",
     "preview": "vite preview",
-    "start": "nodemon service/index.js"
+    "start": "nodemon service/index.cjs"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
