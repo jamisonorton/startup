@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint -c .eslintrc.json ./src/**/**/*.{ts,tsx} --fix",
     "preview": "vite preview",
-    "start": "nodemon service/index.cjs"
+    "start": "nodemon service/index.js"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
@@ -28,12 +28,11 @@
     "@nextui-org/system": "2.2.6",
     "@nextui-org/theme": "2.2.11",
     "@react-aria/visually-hidden": "3.8.12",
-    "axios": "^1.7.8",
+    "bcrypt": "^5.1.1",
     "clsx": "2.1.1",
-    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "framer-motion": "~11.1.1",
-    "googleapis": "^105.0.0",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.11.0",
     "mongoose": "^8.8.3",
     "react": "18.3.1",
