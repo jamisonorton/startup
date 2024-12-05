@@ -1,65 +1,19 @@
-import { MongoClient } from "mongodb";
-import bcrypt from "bcrypt";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-let client;
-let db;
+dotenv.config();
 
-// Function to connect to MongoDB Atlas
-const connectToDatabase = async () => {
-  if (db) return db; // Return existing connection if available
-
+const connectDB = async () => {
   try {
-    client = new MongoClient(process.env.DB_URL, {
+    await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-
-    await client.connect();
-    console.log("Connected to MongoDB Atlas");
-
-    db = client.db(process.env.DB_NAME); // Replace with your database name
-
-    return db;
+    console.log("MongoDB connected");
   } catch (error) {
-    console.error("Failed to connect to MongoDB:", error);
-    process.exit(1); // Exit the process if connection fails
+    console.error("Database connection failed", error);
+    process.exit(1);
   }
 };
 
-// Authentication functions
-const registerUser = async (email, password) => {
-  const usersCollection = db.collection("users");
-  const existingUser = await usersCollection.findOne({ email });
-
-  if (existingUser) {
-    throw new Error("User already exists");
-  }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const result = await usersCollection.insertOne({
-    email,
-    password: hashedPassword,
-  });
-
-  return result.insertedId;
-};
-
-const loginUser = async (email, password) => {
-  const usersCollection = db.collection("users");
-  const user = await usersCollection.findOne({ email });
-
-  if (!user) {
-    throw new Error("User not found");
-  }
-
-  const isPasswordCorrect = await bcrypt.compare(password, user.password);
-
-  if (!isPasswordCorrect) {
-    throw new Error("Invalid credentials");
-  }
-
-  return user;
-};
-
-export { connectToDatabase, registerUser, loginUser };
-export default connectToDatabase;
+export default connectDB;

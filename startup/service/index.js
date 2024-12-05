@@ -1,64 +1,35 @@
 import express from "express";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
+import authRoutes from "./routes/auth.js";
 
-import { connectToDatabase } from "./database.js";
-import authRouter from "./routes/auth.js"; // Import the auth router
-
-// Load environment variables
 dotenv.config();
 
-// Validate environment variables
-if (!process.env.PORT) {
-  console.error("Error: PORT environment variable is not set.");
-  process.exit(1);
-}
-
-if (!process.env.JWT_SECRET) {
-  console.error("Error: JWT_SECRET environment variable is not set.");
-  process.exit(1);
-}
-
 const app = express();
-const port = process.env.PORT;
-
-// Connect to MongoDB
-(async () => {
-  try {
-    await connectToDatabase();
-    console.log("Connected to MongoDB");
-  } catch (error) {
-    console.error("Failed to connect to MongoDB:", error.message);
-    process.exit(1);
-  }
-})();
-
-process.on("SIGINT", async () => {
-  console.log("Shutting down...");
-  process.exit(0);
-});
+const port = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
-app.use(express.static("public"));
-app.set("trust proxy", true);
 
-// API Routes
-app.use(`/api/auth`, authRouter); // Use the auth router
+// Routes
+app.use("/api/auth", authRoutes);
 
-// Test route
-app.get("/api/test", (_req, res) => {
-  res.json({ test: "testData" });
-});
+// Connect to MongoDB
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB connected");
+  } catch (error) {
+    console.error("Database connection failed", error);
+    process.exit(1);
+  }
+};
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res
-    .status(err.status || 500)
-    .json({ error: err.message || "Internal Server Error" });
-});
+connectDB();
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
