@@ -1,5 +1,4 @@
 import { Image } from "@nextui-org/image";
-import { Button } from "@nextui-org/button";
 
 import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
