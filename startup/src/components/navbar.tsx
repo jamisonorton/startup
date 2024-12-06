@@ -48,6 +48,7 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
+<<<<<<< HEAD
   const [userName, setUserName] = React.useState(props.userName);
   const [password, setPassword] = React.useState("");
 
@@ -82,6 +83,8 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
     }
   }
 
+=======
+>>>>>>> 474d54f (redoing login)
   return (
     <NextUINavbar
       maxWidth="xl"
@@ -161,9 +164,13 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
                         label="Email"
                         placeholder="Enter your email"
                         type="email"
+<<<<<<< HEAD
                         value={userName}
                         variant="bordered"
                         onChange={(e) => setUserName(e.target.value)}
+=======
+                        variant="bordered"
+>>>>>>> 474d54f (redoing login)
                       />
                       <Input
                         endContent={
@@ -173,18 +180,25 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
                         placeholder="Enter your password"
                         type="password"
                         variant="bordered"
+<<<<<<< HEAD
                         onChange={(e) => setPassword(e.target.value)}
+=======
+>>>>>>> 474d54f (redoing login)
                       />
                       <ModalFooter>
                         <Button color="danger" variant="flat" onPress={onClose}>
                           Close
                         </Button>
+<<<<<<< HEAD
                         <Button
                           color="primary"
                           disabled={!userName || !password}
                           type="submit"
                           onClick={() => loginUser()}
                         >
+=======
+                        <Button color="primary" type="submit">
+>>>>>>> 474d54f (redoing login)
                           Sign in
                         </Button>
                       </ModalFooter>
@@ -218,9 +232,13 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
                         label="Email"
                         placeholder="Enter your email"
                         type="email"
+<<<<<<< HEAD
                         value={userName}
                         variant="bordered"
                         onChange={(e) => setUserName(e.target.value)}
+=======
+                        variant="bordered"
+>>>>>>> 474d54f (redoing login)
                       />
                       <Input
                         endContent={
@@ -230,18 +248,25 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
                         placeholder="Enter your password"
                         type="password"
                         variant="bordered"
+<<<<<<< HEAD
                         onChange={(e) => setPassword(e.target.value)}
+=======
+>>>>>>> 474d54f (redoing login)
                       />
                       <ModalFooter>
                         <Button color="danger" variant="flat" onPress={onClose}>
                           Close
                         </Button>
+<<<<<<< HEAD
                         <Button
                           color="primary"
                           disabled={!userName || !password}
                           type="submit"
                           onClick={() => createUser()}
                         >
+=======
+                        <Button color="primary" type="submit">
+>>>>>>> 474d54f (redoing login)
                           Sign Up
                         </Button>
                       </ModalFooter>
