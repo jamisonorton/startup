@@ -1,36 +1,29 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+const express = require("express");
+const mongoose = require("mongoose");
 
-import authRoutes from "./routes/auth.js";
-
-dotenv.config();
-
+// Initialize the app
 const app = express();
-const port = process.env.PORT || 5000;
 
-// Middleware
+// Middleware to parse JSON bodies
 app.use(express.json());
 
-// Routes
-app.use("/api/auth", authRoutes);
+// MongoDB connection URI
+const dbURI =
+  "mongodb+srv://jamisonorton:wzDGXeaHBlFdZXxD@cluster0.bi8fh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-// Connect to MongoDB
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("MongoDB connected");
-  } catch (error) {
-    console.error("Database connection failed", error);
-    process.exit(1);
-  }
-};
+// Connect to MongoDB Atlas
+mongoose
+  .connect(dbURI)
+  .then(() => console.log("Connected to MongoDB Atlas"))
+  .catch((error) => console.error("Error connecting to MongoDB Atlas:", error));
 
-connectDB();
+// Sample route
+app.get("/", (req, res) => {
+  res.send("Hello, MongoDB and Express!");
+});
 
+// Set the port
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });
