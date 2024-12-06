@@ -43,34 +43,6 @@ export const Navbar = () => {
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const [userName, setUserName] = React.useState(props.userName);
-  const [password, setPassword] = React.useState("");
-
-  async function loginUser() {
-    loginOrCreate(/api/auth/login);
-  }
-
-  async function createUser() {
-    loginOrCreate(/api/auth/create);
-  }
-
-  async function loginOrCreate(endpoint) {
-    const response = await fetch(endpoint, {
-      method: "post",
-      body: JSON.stringify({ email: userName, password: password }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
-
-    if (response?.status === 200) {
-      localStorage.setItem("userName", userName);
-      props.onLogin(userName);
-    } else {
-      console.log(Error 200);
-    }
-  }
-
   return (
     <NextUINavbar
       maxWidth="xl"
@@ -150,9 +122,7 @@ export const Navbar = () => {
                         label="Email"
                         placeholder="Enter your email"
                         type="email"
-                        value={userName}
                         variant="bordered"
-                        onChange={(e) => setUserName(e.target.value)}
                       />
                       <Input
                         endContent={
@@ -162,18 +132,12 @@ export const Navbar = () => {
                         placeholder="Enter your password"
                         type="password"
                         variant="bordered"
-                        onChange={(e) => setPassword(e.target.value)}
                       />
                       <ModalFooter>
                         <Button color="danger" variant="flat" onPress={onClose}>
                           Close
                         </Button>
-                        <Button
-                          color="primary"
-                          type="submit"
-                          onClick={() => loginUser()}
-                          disabled={!userName || !password}
-                        >
+                        <Button color="primary" type="submit">
                           Sign in
                         </Button>
                       </ModalFooter>
@@ -207,9 +171,7 @@ export const Navbar = () => {
                         label="Email"
                         placeholder="Enter your email"
                         type="email"
-                        value={userName}
                         variant="bordered"
-                        onChange={(e) => setUserName(e.target.value)}
                       />
                       <Input
                         endContent={
@@ -218,20 +180,13 @@ export const Navbar = () => {
                         label="Password"
                         placeholder="Enter your password"
                         type="password"
-                        value={data.password}
                         variant="bordered"
-                        onChange={(e) => setPassword(e.target.value)}
                       />
                       <ModalFooter>
                         <Button color="danger" variant="flat" onPress={onClose}>
                           Close
                         </Button>
-                        <Button
-                          color="primary"
-                          type="submit"
-                          onClick={() => createUser()}
-                          disabled={!userName || !password}
-                        >
+                        <Button color="primary" type="submit">
                           Sign Up
                         </Button>
                       </ModalFooter>
