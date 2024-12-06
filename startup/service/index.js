@@ -1,39 +1,23 @@
-import express from "express";
-import mongoose from "mongoose";
-
-import authRoutes from "./auth.js";
-
+const express = require("express");
 const app = express();
-const port = process.env.PORT;
 
-// Middleware
+const port = process.env.port;
+
+// JSON body parsing using built-in middleware
 app.use(express.json());
 
-// Use the cookie parser middleware for tracking authentication tokens
-app.use(cookieParser());
-
-// Serve up the applications static content
+// Serve up the front-end static content hosting
 app.use(express.static("public"));
 
-// Trust headers that are forwarded from the proxy so we can determine IP addresses
-app.set("trust proxy", true);
+// Router for service endpoints
+var apiRouter = express.Router();
+app.use(`/api`, apiRouter);
 
-// Routes
-app.use("/api/auth", authRoutes);
-
-// Connect to MongoDB
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("MongoDB connected");
-  } catch (error) {
-    console.error("Database connection failed", error);
-    process.exit(1);
-  }
-};
-
-connectDB();
+// Return the application's default page if the path is unknown
+app.use((_req, res) => {
+  res.sendFile("index.html", { root: "public" });
+});
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Listening on port ${port}`);
 });

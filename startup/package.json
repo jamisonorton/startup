@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint -c .eslintrc.json ./src/**/**/*.{ts,tsx} --fix",
-    "preview": "vite preview",
-    "start": "nodemon service/index.js"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
@@ -56,8 +55,6 @@
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-unused-imports": "4.1.4",
-    "express": "^4.21.1",
-    "nodemon": "^3.1.7",
     "postcss": "8.4.38",
     "prettier": "3.3.3",
     "ts-node": "^10.9.2",
