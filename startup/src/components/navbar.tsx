@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
 import {
   Navbar as NextUINavbar,
   NavbarBrand,
@@ -11,36 +10,14 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/navbar";
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-} from "@nextui-org/modal";
 import { link as linkStyles } from "@nextui-org/theme";
 import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { PianoIcon } from "@/components/icons";
-import { MailIcon } from "@/components/icons";
-import { LockIcon } from "@/components/icons";
 
 export const Navbar = () => {
-  const {
-    isOpen: isOpenLogin,
-    onOpen: onOpenLogin,
-    onOpenChange: onOpenChangeLogin,
-  } = useDisclosure();
-
-  const {
-    isOpen: isOpenSignup,
-    onOpen: onOpenSignup,
-    onOpenChange: onOpenChangeSignup,
-  } = useDisclosure();
-
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
@@ -100,101 +77,15 @@ export const Navbar = () => {
       <NavbarContent className="sm:flex basis-1/5 sm:basis-full" justify="end">
         <NavbarItem className="sm:flex gap-2">
           <>
-            <Button color="primary" variant="flat" onPress={onOpenLogin}>
+            <Button as={Link} color="primary" href="/login" variant="flat">
               Login
             </Button>
-            <Modal
-              isOpen={isOpenLogin}
-              placement="top-center"
-              onOpenChange={onOpenChangeLogin}
-            >
-              <ModalContent>
-                {(onClose) => (
-                  <>
-                    <ModalHeader className="flex flex-col gap-1">
-                      Log in
-                    </ModalHeader>
-                    <ModalBody>
-                      <Input
-                        endContent={
-                          <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                        }
-                        label="Email"
-                        placeholder="Enter your email"
-                        type="email"
-                        variant="bordered"
-                      />
-                      <Input
-                        endContent={
-                          <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                        }
-                        label="Password"
-                        placeholder="Enter your password"
-                        type="password"
-                        variant="bordered"
-                      />
-                      <ModalFooter>
-                        <Button color="danger" variant="flat" onPress={onClose}>
-                          Close
-                        </Button>
-                        <Button color="primary" type="submit">
-                          Sign in
-                        </Button>
-                      </ModalFooter>
-                    </ModalBody>
-                  </>
-                )}
-              </ModalContent>
-            </Modal>
           </>
 
           <>
-            <Button color="primary" variant="flat" onPress={onOpenSignup}>
+            <Button as={Link} color="primary" href="/signup" variant="flat">
               Sign Up
             </Button>
-            <Modal
-              isOpen={isOpenSignup}
-              placement="top-center"
-              onOpenChange={onOpenChangeSignup}
-            >
-              <ModalContent>
-                {(onClose) => (
-                  <>
-                    <ModalHeader className="flex flex-col gap-1">
-                      Sign Up
-                    </ModalHeader>
-                    <ModalBody>
-                      <Input
-                        endContent={
-                          <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                        }
-                        label="Email"
-                        placeholder="Enter your email"
-                        type="email"
-                        variant="bordered"
-                      />
-                      <Input
-                        endContent={
-                          <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                        }
-                        label="Password"
-                        placeholder="Enter your password"
-                        type="password"
-                        variant="bordered"
-                      />
-                      <ModalFooter>
-                        <Button color="danger" variant="flat" onPress={onClose}>
-                          Close
-                        </Button>
-                        <Button color="primary" type="submit">
-                          Sign Up
-                        </Button>
-                      </ModalFooter>
-                    </ModalBody>
-                  </>
-                )}
-              </ModalContent>
-            </Modal>
           </>
           <ThemeSwitch />
         </NavbarItem>
