@@ -43,4 +43,4 @@ I will work later on setting up the login and signup functionality.
 
 ## Startup Service
 
-I added some express logic for calling the api
+I added some express logic for calling the api. Remember when using a .env file to not have random spaces next to the string and = sign. So it should be NAME=string not NAME = string. Also connecting to the mongodb you can use 2 methods. First the URI that they give you can add the database that you want to connect to before the first ? or you can add another variable just for the database name.
