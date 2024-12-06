@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import { Input } from "@nextui-org/input";
@@ -29,7 +28,12 @@ import { PianoIcon } from "@/components/icons";
 import { MailIcon } from "@/components/icons";
 import { LockIcon } from "@/components/icons";
 
-export const Navbar = () => {
+interface NavbarProps {
+  userName?: string; // Optional because it may not always be passed
+  onLogin: (userName: string) => void; // A function that takes a string and returns void
+}
+
+export const Navbar: React.FC<NavbarProps> = (props) => {
   const {
     isOpen: isOpenLogin,
     onOpen: onOpenLogin,
@@ -44,64 +48,39 @@ export const Navbar = () => {
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const registerUser = async (
-    e: React.FormEvent<HTMLFormElement>,
-    onClose: () => void
-  ) => {
-    e.preventDefault(); // Prevent page reload
+  const [userName, setUserName] = React.useState(props.userName);
+  const [password, setPassword] = React.useState("");
 
-    try {
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data), // Send email and password
-      });
+  async function loginUser() {
+    loginOrCreate(`/api/auth/login`);
+  }
 
-      if (response.ok) {
-        console.log("User registered successfully!");
-        onClose(); // Close the modal on success
-      } else {
-        const errorData = await response.json();
-        console.error("Error:", errorData.message);
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
+  async function createUser() {
+    loginOrCreate(`/api/auth/create`);
+  }
+
+  async function loginOrCreate(endpoint: string) {
+    if (!userName) {
+      console.error("UserName is undefined or empty");
+
+      return; // Exit early if userName is invalid
     }
-  };
 
-  const loginUser = async (
-    e: React.FormEvent<HTMLFormElement>,
-    onClose: () => void
-  ) => {
-    e.preventDefault(); // Prevent page reload
+    const response = await fetch(endpoint, {
+      method: "post",
+      body: JSON.stringify({ email: userName, password }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
 
-    try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data), // Send email and password
-      });
-
-      if (response.ok) {
-        console.log("Login successful!");
-        onClose(); // Close the modal on success
-      } else {
-        const errorData = await response.json();
-        console.error("Error:", errorData.message);
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
+    if (response?.status === 200) {
+      localStorage.setItem("userName", userName);
+      props.onLogin(userName);
+    } else {
+      console.log("Error 200");
     }
-  };
-
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-  });
+  }
 
   return (
     <NextUINavbar
@@ -175,50 +154,40 @@ export const Navbar = () => {
                       Log in
                     </ModalHeader>
                     <ModalBody>
-                      <form
-                        onSubmit={(e) => {
-                          loginUser(e, onClose); // Pass the `onClose` function to close the modal on success
-                        }}
-                      >
-                        <Input
-                          endContent={
-                            <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                          }
-                          label="Email"
-                          placeholder="Enter your email"
-                          type="email"
-                          value={data.email}
-                          variant="bordered"
-                          onChange={(e) =>
-                            setData({ ...data, email: e.target.value })
-                          }
-                        />
-                        <Input
-                          endContent={
-                            <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                          }
-                          label="Password"
-                          placeholder="Enter your password"
-                          type="password"
-                          value={data.password}
-                          variant="bordered"
-                          onChange={(e) =>
-                            setData({ ...data, password: e.target.value })
-                          }
-                        />
-                        <ModalFooter>
-                          <Button
-                            color="danger"
-                            variant="flat"
-                            onPress={onClose}
-                          >
-                            Close
-                          </Button>
-                          <Button color="primary" type="submit">
-                            Sign in
-                          </Button>
-                        </ModalFooter>
-                      </form>
+                      <Input
+                        endContent={
+                          <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                        }
+                        label="Email"
+                        placeholder="Enter your email"
+                        type="email"
+                        value={userName}
+                        variant="bordered"
+                        onChange={(e) => setUserName(e.target.value)}
+                      />
+                      <Input
+                        endContent={
+                          <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                        }
+                        label="Password"
+                        placeholder="Enter your password"
+                        type="password"
+                        variant="bordered"
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                      <ModalFooter>
+                        <Button color="danger" variant="flat" onPress={onClose}>
+                          Close
+                        </Button>
+                        <Button
+                          color="primary"
+                          disabled={!userName || !password}
+                          type="submit"
+                          onClick={() => loginUser()}
+                        >
+                          Sign in
+                        </Button>
+                      </ModalFooter>
                     </ModalBody>
                   </>
                 )}
@@ -242,50 +211,40 @@ export const Navbar = () => {
                       Sign Up
                     </ModalHeader>
                     <ModalBody>
-                      <form
-                        onSubmit={(e) => {
-                          registerUser(e, onClose); // Pass the `onClose` function to close the modal after success
-                        }}
-                      >
-                        <Input
-                          endContent={
-                            <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                          }
-                          label="Email"
-                          placeholder="Enter your email"
-                          type="email"
-                          value={data.email}
-                          variant="bordered"
-                          onChange={(e) =>
-                            setData({ ...data, email: e.target.value })
-                          }
-                        />
-                        <Input
-                          endContent={
-                            <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                          }
-                          label="Password"
-                          placeholder="Enter your password"
-                          type="password"
-                          value={data.password}
-                          variant="bordered"
-                          onChange={(e) =>
-                            setData({ ...data, password: e.target.value })
-                          }
-                        />
-                        <ModalFooter>
-                          <Button
-                            color="danger"
-                            variant="flat"
-                            onPress={onClose}
-                          >
-                            Close
-                          </Button>
-                          <Button color="primary" type="submit">
-                            Sign Up
-                          </Button>
-                        </ModalFooter>
-                      </form>
+                      <Input
+                        endContent={
+                          <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                        }
+                        label="Email"
+                        placeholder="Enter your email"
+                        type="email"
+                        value={userName}
+                        variant="bordered"
+                        onChange={(e) => setUserName(e.target.value)}
+                      />
+                      <Input
+                        endContent={
+                          <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                        }
+                        label="Password"
+                        placeholder="Enter your password"
+                        type="password"
+                        variant="bordered"
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                      <ModalFooter>
+                        <Button color="danger" variant="flat" onPress={onClose}>
+                          Close
+                        </Button>
+                        <Button
+                          color="primary"
+                          disabled={!userName || !password}
+                          type="submit"
+                          onClick={() => createUser()}
+                        >
+                          Sign Up
+                        </Button>
+                      </ModalFooter>
                     </ModalBody>
                   </>
                 )}

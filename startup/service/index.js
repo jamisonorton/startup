@@ -31,6 +31,7 @@ apiRouter.post("/auth/create", async (req, res) => {
       password: req.body.password,
       token: uuid.v4(),
     };
+
     users[user.email] = user;
 
     res.send({ token: user.token });
@@ -45,6 +46,7 @@ apiRouter.post("/auth/login", async (req, res) => {
     if (req.body.password === user.password) {
       user.token = uuid.v4();
       res.send({ token: user.token });
+
       return;
     }
   }
