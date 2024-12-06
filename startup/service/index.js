@@ -1,13 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 
 import authRoutes from "./auth.js";
 
-dotenv.config({ path: "../.env" });
-
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
 // Middleware
 app.use(express.json());
