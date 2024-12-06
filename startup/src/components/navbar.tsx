@@ -28,12 +28,7 @@ import { PianoIcon } from "@/components/icons";
 import { MailIcon } from "@/components/icons";
 import { LockIcon } from "@/components/icons";
 
-interface NavbarProps {
-  userName?: string; // Optional because it may not always be passed
-  onLogin: (userName: string) => void; // A function that takes a string and returns void
-}
-
-export const Navbar: React.FC<NavbarProps> = (props) => {
+export const Navbar = () => {
   const {
     isOpen: isOpenLogin,
     onOpen: onOpenLogin,
@@ -48,28 +43,21 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-<<<<<<< HEAD
   const [userName, setUserName] = React.useState(props.userName);
   const [password, setPassword] = React.useState("");
 
   async function loginUser() {
-    loginOrCreate(`/api/auth/login`);
+    loginOrCreate(/api/auth/login);
   }
 
   async function createUser() {
-    loginOrCreate(`/api/auth/create`);
+    loginOrCreate(/api/auth/create);
   }
 
-  async function loginOrCreate(endpoint: string) {
-    if (!userName) {
-      console.error("UserName is undefined or empty");
-
-      return; // Exit early if userName is invalid
-    }
-
+  async function loginOrCreate(endpoint) {
     const response = await fetch(endpoint, {
       method: "post",
-      body: JSON.stringify({ email: userName, password }),
+      body: JSON.stringify({ email: userName, password: password }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
@@ -79,12 +67,10 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
       localStorage.setItem("userName", userName);
       props.onLogin(userName);
     } else {
-      console.log("Error 200");
+      console.log(Error 200);
     }
   }
 
-=======
->>>>>>> 474d54f (redoing login)
   return (
     <NextUINavbar
       maxWidth="xl"
@@ -164,13 +150,9 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
                         label="Email"
                         placeholder="Enter your email"
                         type="email"
-<<<<<<< HEAD
                         value={userName}
                         variant="bordered"
                         onChange={(e) => setUserName(e.target.value)}
-=======
-                        variant="bordered"
->>>>>>> 474d54f (redoing login)
                       />
                       <Input
                         endContent={
@@ -180,25 +162,18 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
                         placeholder="Enter your password"
                         type="password"
                         variant="bordered"
-<<<<<<< HEAD
                         onChange={(e) => setPassword(e.target.value)}
-=======
->>>>>>> 474d54f (redoing login)
                       />
                       <ModalFooter>
                         <Button color="danger" variant="flat" onPress={onClose}>
                           Close
                         </Button>
-<<<<<<< HEAD
                         <Button
                           color="primary"
-                          disabled={!userName || !password}
                           type="submit"
                           onClick={() => loginUser()}
+                          disabled={!userName || !password}
                         >
-=======
-                        <Button color="primary" type="submit">
->>>>>>> 474d54f (redoing login)
                           Sign in
                         </Button>
                       </ModalFooter>
@@ -232,13 +207,9 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
                         label="Email"
                         placeholder="Enter your email"
                         type="email"
-<<<<<<< HEAD
                         value={userName}
                         variant="bordered"
                         onChange={(e) => setUserName(e.target.value)}
-=======
-                        variant="bordered"
->>>>>>> 474d54f (redoing login)
                       />
                       <Input
                         endContent={
@@ -247,26 +218,20 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
                         label="Password"
                         placeholder="Enter your password"
                         type="password"
+                        value={data.password}
                         variant="bordered"
-<<<<<<< HEAD
                         onChange={(e) => setPassword(e.target.value)}
-=======
->>>>>>> 474d54f (redoing login)
                       />
                       <ModalFooter>
                         <Button color="danger" variant="flat" onPress={onClose}>
                           Close
                         </Button>
-<<<<<<< HEAD
                         <Button
                           color="primary"
-                          disabled={!userName || !password}
                           type="submit"
                           onClick={() => createUser()}
+                          disabled={!userName || !password}
                         >
-=======
-                        <Button color="primary" type="submit">
->>>>>>> 474d54f (redoing login)
                           Sign Up
                         </Button>
                       </ModalFooter>
