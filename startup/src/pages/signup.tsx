@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { Form } from "@nextui-org/form";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
@@ -8,6 +9,12 @@ import DefaultLayout from "@/layouts/default";
 
 export default function DocsPage() {
   const [action] = React.useState(null);
+
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   return (
     <DefaultLayout>
@@ -25,22 +32,35 @@ export default function DocsPage() {
           >
             <Input
               isRequired
-              errorMessage="Please enter a valid username"
-              label="Username"
+              label="Name"
               labelPlacement="outside"
-              name="username"
-              placeholder="Enter your username"
+              name="Name"
+              placeholder="Enter your name"
               type="text"
+              value={data.name}
+              onChange={(e) => setData({ ...data, name: e.target.value })}
             />
 
             <Input
               isRequired
-              errorMessage="Please enter a valid email"
+              label="Email"
+              labelPlacement="outside"
+              name="email"
+              placeholder="Enter your email"
+              type="email"
+              value={data.email}
+              onChange={(e) => setData({ ...data, email: e.target.value })}
+            />
+
+            <Input
+              isRequired
               label="Password"
               labelPlacement="outside"
               name="password"
               placeholder="Enter your passsword"
               type="password"
+              value={data.password}
+              onChange={(e) => setData({ ...data, password: e.target.value })}
             />
             <div className="flex gap-2">
               <Button color="primary" type="submit">
