@@ -45,8 +45,8 @@ I will work later on setting up the login and signup functionality.
 
 I added some express logic for calling the api. Remember when using a .env file to not have random spaces next to the string and = sign. So it should be NAME=string not NAME = string. Also connecting to the mongodb you can use 2 methods. First the URI that they give you can add the database that you want to connect to before the first ? or you can add another variable just for the database name.
 
-I have added simon to my server and it works. I have also finished adding all of my api calls. /auth/login /auth/create work and actually create users. Everything should be good to go.
+I have added simon to my server and it works. I have also finished adding all of my api calls. /auth/login /auth/create work and actually create users. Everything should be good to go. I have gone ahead and updated to simon login and finished that one as well.
 
 ## Startup Login
 
-Copied and pasted most of the logic for loggin in. I needed to add some functions in my login and register page to fetch those apis. Encountered a 502 error that I still need to debug.
+All login and create logic work and send the data to mongodb.
