@@ -27,9 +27,12 @@ export default function DocsPage(): JSX.Element {
     const { name, email, password } = data;
 
     try {
-      const response = await fetch("/auth/create", {
-        method: "POST",
+      const response = await fetch(`/api/auth/create`, {
+        method: "post",
         body: JSON.stringify({ name, email, password }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
       });
 
       if (!response.ok) {

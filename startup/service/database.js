@@ -13,7 +13,6 @@ const userCollection = db.collection("users");
 (async function testConnection() {
   await client.connect();
   await db.command({ ping: 1 });
-  console.log("Successfully connected to the database!");
 })().catch((ex) => {
   console.log(
     `Unable to connect to database with ${url} because ${ex.message}`
