@@ -1,19 +1,38 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Form } from "@nextui-org/form";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
+import axios from "axios";
 
 import DefaultLayout from "@/layouts/default";
 import { title } from "@/components/primitives";
 
-export default function DocsPage() {
-  const [action] = React.useState(null);
+interface LoginData {
+  email: string;
+  password: string;
+}
 
-  const [data, setData] = useState({
+export default function DocsPage(): JSX.Element {
+  const [action, setAction] = useState<string | null>(null);
+  const [data, setData] = useState<LoginData>({
     email: "",
     password: "",
   });
+
+  const loginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const { email, password } = data;
+
+    try {
+      const response = await axios.post("/auth/login", { email, password });
+
+      console.log("Login successful:", response.data);
+      setAction("Login successful");
+    } catch (error) {
+      console.error("Login failed:", error);
+      setAction("Login failed");
+    }
+  };
 
   return (
     <DefaultLayout>
@@ -25,32 +44,34 @@ export default function DocsPage() {
           <Form
             className="w-full max-w-xs flex flex-col gap-4"
             validationBehavior="native"
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
+            onSubmit={loginSubmit} // Reference async function
           >
             <Input
               isRequired
-              errorMessage="Please enter a valid username"
+              errorMessage="Please enter a valid email"
               label="Email"
               labelPlacement="outside"
               name="email"
               placeholder="Enter your email"
               type="email"
               value={data.email}
-              onChange={(e) => setData({ ...data, email: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setData({ ...data, email: e.target.value })
+              }
             />
 
             <Input
               isRequired
-              errorMessage="Please enter a valid email"
+              errorMessage="Please enter a valid password"
               label="Password"
               labelPlacement="outside"
               name="password"
-              placeholder="Enter your passsword"
+              placeholder="Enter your password"
               type="password"
               value={data.password}
-              onChange={(e) => setData({ ...data, password: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setData({ ...data, password: e.target.value })
+              }
             />
             <div className="flex gap-2">
               <Button color="primary" type="submit">

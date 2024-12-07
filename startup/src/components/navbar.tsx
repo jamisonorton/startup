@@ -83,7 +83,7 @@ export const Navbar = () => {
           </>
 
           <>
-            <Button as={Link} color="primary" href="/signup" variant="flat">
+            <Button as={Link} color="primary" href="/register" variant="flat">
               Sign Up
             </Button>
           </>

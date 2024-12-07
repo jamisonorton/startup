@@ -1,5 +1,6 @@
 // import React from "react";
 import { Route, Routes } from "react-router-dom";
+import axios from "axios";
 
 import IndexPage from "@/pages/index";
 import AboutPage from "@/pages/about";
@@ -7,7 +8,10 @@ import DocsPage from "@/pages/login";
 import CalendarPage from "@/pages/calendar";
 import PricingPage from "@/pages/pricing";
 import LoginPage from "@/pages/login";
-import SignupPage from "@/pages/signup";
+import RegisterPage from "@/pages/register";
+
+axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.withCredentials = true;
 
 function App() {
   return (
@@ -18,7 +22,7 @@ function App() {
       <Route element={<CalendarPage />} path="/calendar" />
       <Route element={<PricingPage />} path="/pricing" />
       <Route element={<LoginPage />} path="/login" />
-      <Route element={<SignupPage />} path="/signup" />
+      <Route element={<RegisterPage />} path="/register" />
     </Routes>
   );
 }

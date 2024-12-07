@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { Form } from "@nextui-org/form";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
@@ -7,14 +7,39 @@ import { Input } from "@nextui-org/input";
 import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 
-export default function DocsPage() {
-  const [action] = React.useState(null);
+// Define types for the form data
+interface FormData {
+  name: string;
+  email: string;
+  password: string;
+}
 
-  const [data, setData] = useState({
+export default function DocsPage(): JSX.Element {
+  const [action, setAction] = useState<string | null>(null);
+  const [data, setData] = useState<FormData>({
     name: "",
     email: "",
     password: "",
   });
+
+  const registerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const { name, email, password } = data;
+
+    try {
+      const response = await axios.post("/auth/create", {
+        name,
+        email,
+        password,
+      });
+
+      console.log(response.data);
+      setAction("Signup successful");
+    } catch (error) {
+      console.error(error);
+      setAction("Signup failed");
+    }
+  };
 
   return (
     <DefaultLayout>
@@ -26,19 +51,19 @@ export default function DocsPage() {
           <Form
             className="w-full max-w-xs flex flex-col gap-4"
             validationBehavior="native"
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
+            onSubmit={registerSubmit} // Reference async function
           >
             <Input
               isRequired
               label="Name"
               labelPlacement="outside"
-              name="Name"
+              name="name"
               placeholder="Enter your name"
               type="text"
               value={data.name}
-              onChange={(e) => setData({ ...data, name: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setData({ ...data, name: e.target.value })
+              }
             />
 
             <Input
@@ -49,7 +74,9 @@ export default function DocsPage() {
               placeholder="Enter your email"
               type="email"
               value={data.email}
-              onChange={(e) => setData({ ...data, email: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setData({ ...data, email: e.target.value })
+              }
             />
 
             <Input
@@ -57,10 +84,12 @@ export default function DocsPage() {
               label="Password"
               labelPlacement="outside"
               name="password"
-              placeholder="Enter your passsword"
+              placeholder="Enter your password"
               type="password"
               value={data.password}
-              onChange={(e) => setData({ ...data, password: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setData({ ...data, password: e.target.value })
+              }
             />
             <div className="flex gap-2">
               <Button color="primary" type="submit">

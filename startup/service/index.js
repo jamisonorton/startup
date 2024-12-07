@@ -1,6 +1,7 @@
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
 const DB = require("./database.js");
@@ -16,6 +17,15 @@ app.use(express.json());
 
 // Use the cookie parser middleware for tracking authentication tokens
 app.use(cookieParser());
+
+// CORS configuration
+const corsOptions = {
+  origin: "http://localhost:5173", // Update this to your frontend's URL in production
+  credentials: true, // Allow cookies to be sent with requests
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+};
+
+app.use(cors(corsOptions));
 
 // Serve up the applications static content
 app.use(express.static("public"));
@@ -33,7 +43,11 @@ apiRouter.post("/auth/create", async (req, res) => {
   if (await DB.getUser(req.body.email)) {
     res.status(409).send({ msg: "Existing user" });
   } else {
-    const user = await DB.createUser(req.body.email, req.body.password);
+    const user = await DB.createUser(
+      req.body.name,
+      req.body.email,
+      req.body.password
+    );
 
     // Set the cookie
     setAuthCookie(res, user.token);
@@ -94,9 +108,9 @@ app.use((_req, res) => {
 // setAuthCookie in the HTTP response
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {
-    secure: true,
-    httpOnly: true,
-    sameSite: "strict",
+    secure: true, // Ensure secure cookies in production
+    httpOnly: true, // Prevent client-side JS from accessing the cookie
+    sameSite: "strict", // Prevent CSRF attacks
   });
 }
 
