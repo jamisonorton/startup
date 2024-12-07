@@ -6,41 +6,51 @@ import { Input } from "@nextui-org/input";
 import DefaultLayout from "@/layouts/default";
 import { title } from "@/components/primitives";
 
-interface LoginData {
+interface FormData {
   email: string;
   password: string;
 }
 
 export default function DocsPage(): JSX.Element {
-  const [action, setAction] = useState<string | null>(null);
-  const [data, setData] = useState<LoginData>({
+  const [data, setData] = useState<FormData>({
     email: "",
     password: "",
   });
 
-  const loginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  async function allowUser(endpoint: string) {
     const { email, password } = data;
 
     try {
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch(endpoint, {
         method: "POST",
         body: JSON.stringify({ email, password }),
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (response.status === 200) {
+        localStorage.setItem("email", email);
+        // Assuming a successful signup action
+        console.log("User login successful!");
+      } else {
+        const body = await response.json();
+
+        console.error("Error:", body);
       }
-
-      const result = await response.json();
-
-      console.log("Login successful:", result);
-      setAction("Login successful");
     } catch (error) {
-      console.error("Login failed:", error);
-      setAction("Login failed");
+      console.error("Network error:", error);
     }
-  };
+  }
+
+  async function loginUser() {
+    await allowUser(`/api/auth/login`);
+  }
+
+  async function loginSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    await loginUser();
+  }
 
   return (
     <DefaultLayout>
@@ -82,15 +92,14 @@ export default function DocsPage(): JSX.Element {
               }
             />
             <div className="flex gap-2">
-              <Button color="primary" type="submit">
+              <Button
+                color="primary"
+                type="submit"
+                onClick={() => allowUser(`/api/auth/login`)}
+              >
                 Login
               </Button>
             </div>
-            {action && (
-              <div className="text-small text-default-500">
-                Action: <code>{action}</code>
-              </div>
-            )}
           </Form>
         </div>
       </section>

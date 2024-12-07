@@ -20,7 +20,7 @@ export default function DocsPage(): JSX.Element {
     password: "",
   });
 
-  async function createMe(endpoint: string) {
+  async function createUser(endpoint: string) {
     const { name, email, password } = data;
 
     try {
@@ -47,7 +47,7 @@ export default function DocsPage(): JSX.Element {
   }
 
   async function registerUser() {
-    await createMe(`/api/auth/create`);
+    await createUser(`/api/auth/create`);
   }
 
   async function registerSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -105,8 +105,12 @@ export default function DocsPage(): JSX.Element {
                 setData({ ...data, password: e.target.value })
               }
             />
-            <div className="flex gap-2">
-              <Button color="primary" type="submit">
+            <div className="inline-block max-w-lg text-center justify-center">
+              <Button
+                color="primary"
+                type="submit"
+                onClick={() => createUser(`/api/auth/create`)}
+              >
                 Signup
               </Button>
             </div>
