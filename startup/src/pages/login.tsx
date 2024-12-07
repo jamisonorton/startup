@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Form } from "@nextui-org/form";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
-import axios from "axios";
 
 import DefaultLayout from "@/layouts/default";
 import { title } from "@/components/primitives";
@@ -24,9 +23,21 @@ export default function DocsPage(): JSX.Element {
     const { email, password } = data;
 
     try {
-      const response = await axios.post("/auth/login", { email, password });
+      const response = await fetch("/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-      console.log("Login successful:", response.data);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      console.log("Login successful:", result);
       setAction("Login successful");
     } catch (error) {
       console.error("Login failed:", error);

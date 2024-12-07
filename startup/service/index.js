@@ -1,7 +1,6 @@
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
 const express = require("express");
-const cors = require("cors");
 
 const app = express();
 const DB = require("./database.js");
@@ -17,15 +16,6 @@ app.use(express.json());
 
 // Use the cookie parser middleware for tracking authentication tokens
 app.use(cookieParser());
-
-// CORS configuration
-const corsOptions = {
-  origin: "http://localhost:5173", // Update this to your frontend's URL in production
-  credentials: true, // Allow cookies to be sent with requests
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-};
-
-app.use(cors(corsOptions));
 
 // Serve up the applications static content
 app.use(express.static("public"));

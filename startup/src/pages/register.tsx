@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Form } from "@nextui-org/form";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
@@ -27,13 +26,21 @@ export default function DocsPage(): JSX.Element {
     const { name, email, password } = data;
 
     try {
-      const response = await axios.post("/auth/create", {
-        name,
-        email,
-        password,
+      const response = await fetch("/auth/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
       });
 
-      console.log(response.data);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      console.log(result);
       setAction("Signup successful");
     } catch (error) {
       console.error(error);

@@ -10,7 +10,7 @@ import PricingPage from "@/pages/pricing";
 import LoginPage from "@/pages/login";
 import RegisterPage from "@/pages/register";
 
-axios.defaults.baseURL = "http://startup.janesmusicstudio.com:4000";
+axios.defaults.baseURL = "https://startup.janesmusicstudio.com:4000";
 axios.defaults.withCredentials = true;
 
 function App() {
