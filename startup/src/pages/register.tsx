@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Form } from "@nextui-org/form";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
@@ -14,6 +15,8 @@ interface FormData {
 }
 
 export default function DocsPage(): JSX.Element {
+  const navigate = useNavigate();
+
   const [data, setData] = useState<FormData>({
     name: "",
     email: "",
@@ -35,6 +38,7 @@ export default function DocsPage(): JSX.Element {
       if (response.status === 200) {
         localStorage.setItem("email", email);
         // Assuming a successful signup action
+        navigate("/");
         console.log("User created successfully!");
       } else {
         const body = await response.json();

@@ -14,7 +14,7 @@ export default function IndexPage() {
         </div>
         <div className="flex flex-col grow-0 max-w-lg text-center justify-start">
           <h1 className={title()}>
-            This is the home page for Jane's Piano School Website.
+            This is the home page for Jane&apos;s Piano School Website.
           </h1>
           <br />
         </div>
