@@ -14,8 +14,8 @@ export default function DocsPage() {
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         <div className="inline-block max-w-lg text-center justify-center">
           <h1 className={title()}>Signup</h1>
-          <br />
-          <br />
+        </div>
+        <div className="inline-block max-w-lg text-center justify-center">
           <Form
             className="w-full max-w-xs flex flex-col gap-4"
             validationBehavior="native"
