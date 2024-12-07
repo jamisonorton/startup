@@ -55,6 +55,7 @@ export const Navbar = () => {
               </Link>
             </NavbarItem>
           ))}
+          {/* Calendar Navbar for making it only accessible after logging in */}
           <Link
             className={clsx(
               linkStyles({ color: "foreground" }),
