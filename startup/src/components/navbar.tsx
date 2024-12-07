@@ -96,6 +96,12 @@ export const Navbar = () => {
           </>
 
           <>
+            <Button as={Link} color="primary" href="/logout" variant="flat">
+              Logout
+            </Button>
+          </>
+
+          <>
             <Button as={Link} color="primary" href="/register" variant="flat">
               Sign Up
             </Button>
