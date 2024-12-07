@@ -16,10 +16,10 @@ export const siteConfig = {
       label: "Pricing",
       href: "/pricing",
     },
-    {
-      label: "Calendar",
-      href: "/calendar",
-    },
+    // {
+    //   label: "Calendar",
+    //   href: "/calendar",
+    // },
   ],
   navMenuItems: [
     {

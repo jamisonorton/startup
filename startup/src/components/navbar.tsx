@@ -55,6 +55,16 @@ export const Navbar = () => {
               </Link>
             </NavbarItem>
           ))}
+          <Link
+            className={clsx(
+              linkStyles({ color: "foreground" }),
+              "data-[active=true]:text-primary data-[active=true]:font-medium"
+            )}
+            color="foreground"
+            href="/calendar"
+          >
+            Calendar
+          </Link>
         </div>
       </NavbarContent>
       <NavbarMenu>
@@ -70,6 +80,8 @@ export const Navbar = () => {
             >
               {item.label}
             </Link>
+
+            <Link href="#">Default Link</Link>
           </NavbarMenuItem>
         ))}
       </NavbarMenu>

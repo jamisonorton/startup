@@ -49,4 +49,4 @@ I have added simon to my server and it works. I have also finished adding all of
 
 ## Startup Login
 
-All login and create logic work and send the data to mongodb.
+All login and create logic work and send the data to mongodb. Creating a user sends the json to the janesmusicstudio database with a collection of user. It hashes the password.
