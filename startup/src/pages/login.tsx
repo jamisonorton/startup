@@ -23,7 +23,7 @@ export default function DocsPage(): JSX.Element {
     const { email, password } = data;
 
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch("/auth/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });

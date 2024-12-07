@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   server: {
     proxy: {
-      "/api": "https://startup.janesmusicstudio.com:4000",
+      "/api": "http://localhost:4000",
     },
   },
 });
