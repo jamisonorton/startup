@@ -3,8 +3,8 @@ import { Form } from "@nextui-org/form";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 
-import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
+import { title } from "@/components/primitives";
 
 export default function DocsPage() {
   const [action] = React.useState(null);
