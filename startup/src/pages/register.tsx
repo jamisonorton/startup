@@ -14,40 +14,46 @@ interface FormData {
 }
 
 export default function DocsPage(): JSX.Element {
-  const [action, setAction] = useState<string | null>(null);
-
   const [data, setData] = useState<FormData>({
     name: "",
     email: "",
     password: "",
   });
 
-  const registerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  async function createMe(endpoint: string) {
     const { name, email, password } = data;
 
     try {
-      const response = await fetch(`/api/auth/create`, {
-        method: "post",
+      const response = await fetch(endpoint, {
+        method: "POST",
         body: JSON.stringify({ name, email, password }),
         headers: {
-          "Content-type": "application/json; charset=UTF-8",
+          "Content-Type": "application/json; charset=UTF-8",
         },
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (response.status === 200) {
+        localStorage.setItem("email", email);
+        // Assuming a successful signup action
+        console.log("User created successfully!");
+      } else {
+        const body = await response.json();
+
+        console.error("Error:", body);
       }
-
-      const result = await response.json();
-
-      console.log(result);
-      setAction("Signup successful");
     } catch (error) {
-      console.error(error);
-      setAction("Signup failed");
+      console.error("Network error:", error);
     }
-  };
+  }
+
+  async function registerUser() {
+    await createMe(`/api/auth/create`);
+  }
+
+  async function registerSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    await registerUser();
+  }
 
   return (
     <DefaultLayout>
@@ -59,7 +65,7 @@ export default function DocsPage(): JSX.Element {
           <Form
             className="w-full max-w-xs flex flex-col gap-4"
             validationBehavior="native"
-            onSubmit={registerSubmit} // Reference async function
+            onSubmit={registerSubmit}
           >
             <Input
               isRequired
@@ -104,11 +110,6 @@ export default function DocsPage(): JSX.Element {
                 Signup
               </Button>
             </div>
-            {action && (
-              <div className="text-small text-default-500">
-                Action: <code>{action}</code>
-              </div>
-            )}
           </Form>
         </div>
       </section>
