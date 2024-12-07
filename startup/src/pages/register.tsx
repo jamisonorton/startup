@@ -15,6 +15,7 @@ interface FormData {
 
 export default function DocsPage(): JSX.Element {
   const [action, setAction] = useState<string | null>(null);
+
   const [data, setData] = useState<FormData>({
     name: "",
     email: "",
