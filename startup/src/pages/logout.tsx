@@ -24,6 +24,7 @@ export default function DocsPage(): JSX.Element {
   async function logoutUser(): Promise<void> {
     await deleteUser(`/api/auth/logout`);
     navigate("/"); // Redirect to the homepage after logging out
+    console.log("User logout successful!");
   }
 
   return (

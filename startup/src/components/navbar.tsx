@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import {
@@ -12,23 +12,47 @@ import {
 } from "@nextui-org/navbar";
 import { link as linkStyles } from "@nextui-org/theme";
 import clsx from "clsx";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { PianoIcon } from "@/components/icons";
 
 export const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check if a user is logged in by verifying the cookie
+  useEffect(() => {
+    const token = Cookies.get("token"); // Retrieve the token from cookies
+    setIsLoggedIn(!!token); // Convert to boolean (true if token exists, false otherwise)
+  }, []);
+
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", {
+        method: "DELETE",
+        credentials: "include", // Include cookies in the request
+      });
+      Cookies.remove("token"); // Remove the token from cookies
+      setIsLoggedIn(false); // Update state
+      navigate("/"); // Redirect to home
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
+  };
 
   return (
     <NextUINavbar
       maxWidth="xl"
       position="static"
-      onMenuOpenChange={setIsMenuOpen}
+      onMenuOpenChange={(isOpen) => {}}
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-label={isLoggedIn ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
         <NavbarBrand className="gap-3 max-w-fit">
@@ -55,17 +79,6 @@ export const Navbar = () => {
               </Link>
             </NavbarItem>
           ))}
-          {/* Calendar Navbar for making it only accessible after logging in */}
-          <Link
-            className={clsx(
-              linkStyles({ color: "foreground" }),
-              "data-[active=true]:text-primary data-[active=true]:font-medium"
-            )}
-            color="foreground"
-            href="/calendar"
-          >
-            Calendar
-          </Link>
         </div>
       </NavbarContent>
       <NavbarMenu>
@@ -87,23 +100,20 @@ export const Navbar = () => {
 
       <NavbarContent className="sm:flex basis-1/5 sm:basis-full" justify="end">
         <NavbarItem className="sm:flex gap-2">
-          <>
-            <Button as={Link} color="primary" href="/login" variant="flat">
-              Login
-            </Button>
-          </>
-
-          <>
-            <Button as={Link} color="primary" href="/" variant="flat">
+          {!isLoggedIn ? (
+            <>
+              <Button as={Link} color="primary" href="/login" variant="flat">
+                Login
+              </Button>
+              <Button as={Link} color="primary" href="/register" variant="flat">
+                Sign Up
+              </Button>
+            </>
+          ) : (
+            <Button color="primary" variant="flat" onClick={handleLogout}>
               Logout
             </Button>
-          </>
-
-          <>
-            <Button as={Link} color="primary" href="/register" variant="flat">
-              Sign Up
-            </Button>
-          </>
+          )}
           <ThemeSwitch />
         </NavbarItem>
       </NavbarContent>
