@@ -21,35 +21,52 @@ import { PianoIcon } from "@/components/icons";
 
 export const Navbar = () => {
   const navigate = useNavigate();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Check if a user is logged in by verifying the cookie
-  useEffect(() => {
+  // Function to check login status
+  const checkLoginStatus = () => {
     const token = Cookies.get("token"); // Retrieve the token from cookies
-    setIsLoggedIn(!!token); // Convert to boolean (true if token exists, false otherwise)
+
+    setIsLoggedIn(!!token); // Update state
+  };
+
+  useEffect(() => {
+    // Check login status on component mount
+    checkLoginStatus();
+
+    // Listen to storage changes for cross-tab sync
+    const handleStorageChange = () => checkLoginStatus();
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
-  // Handle logout
+  // Logout handler
   const handleLogout = async () => {
     try {
-      await fetch("/api/auth/logout", {
+      const response = await fetch("/api/auth/logout", {
         method: "DELETE",
         credentials: "include", // Include cookies in the request
       });
-      Cookies.remove("token"); // Remove the token from cookies
-      setIsLoggedIn(false); // Update state
-      navigate("/"); // Redirect to home
-    } catch (err) {
-      console.error("Logout failed:", err);
+
+      if (response.ok) {
+        Cookies.remove("token"); // Remove the token from cookies
+        setIsLoggedIn(false); // Update state
+        navigate("/"); // Redirect to the home page
+      } else {
+        console.error("Failed to logout:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Logout failed:", error);
     }
   };
 
   return (
-    <NextUINavbar
-      maxWidth="xl"
-      position="static"
-      onMenuOpenChange={(isOpen) => {}}
-    >
+    <NextUINavbar maxWidth="xl" position="static">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarMenuToggle
           aria-label={isLoggedIn ? "Close menu" : "Open menu"}
