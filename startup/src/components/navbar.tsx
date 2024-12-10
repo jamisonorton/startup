@@ -81,8 +81,6 @@ export const Navbar = () => {
             >
               {item.label}
             </Link>
-
-            <Link href="#">Default Link</Link>
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
