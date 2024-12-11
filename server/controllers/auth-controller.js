@@ -23,7 +23,10 @@ export const signup = async (req, res) => {
 
     generateJWTToken(res, user._id);
 
-    res.status(201).json({ message: "User was created successfully" });
+    res.status(201).json({
+      message: "User was created successfully",
+      user: { ...user._doc, password: undefined },
+    });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -45,7 +48,10 @@ export const login = async (req, res) => {
 
     generateJWTToken(res, user._id);
 
-    res.status(200).json({ message: "Login Successful" });
+    res.status(200).json({
+      message: "Login Successful",
+      user: { ...user._doc, password: undefined },
+    });
   } catch (error) {
     console.log("error logging in", error);
     res.status(400), json({ message: error.message });
