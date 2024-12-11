@@ -3,58 +3,61 @@ import { useNavigate } from "react-router-dom";
 import { Form } from "@nextui-org/form";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
+import Cookies from "js-cookie";
 
 import DefaultLayout from "@/layouts/default";
 import { title } from "@/components/primitives";
+import { useAuth } from "../provider";
 
 interface FormData {
   email: string;
   password: string;
 }
 
-export default function DocsPage(): JSX.Element {
+export default function LoginPage(): JSX.Element {
   const navigate = useNavigate();
+  const { login } = useAuth(); // Get the login function from AuthContext
+  const [data, setData] = useState<FormData>({ email: "", password: "" });
 
-  const [data, setData] = useState<FormData>({
-    email: "",
-    password: "",
-  });
-
-  async function allowUser(endpoint: string) {
-    const { email, password } = data;
-
+  const allowUser = async (endpoint: string) => {
     try {
       const response = await fetch(endpoint, {
         method: "POST",
-        body: JSON.stringify({ email, password }),
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-        },
+        credentials: "include",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
       });
 
-      if (response.status === 200) {
-        localStorage.setItem("email", email);
-        // Assuming a successful login action
-        navigate("/");
-        console.log("User login successful!");
-      } else {
-        const body = await response.json();
+      if (response.ok) {
+        const { token } = await response.json();
+        if (token) {
+          // Save the token in cookies
+          Cookies.set("token", token, {
+            expires: 1,
+            path: "/",
+            secure: true,
+            sameSite: "None",
+          });
 
-        console.error("Error:", body);
+          // Call login to update the state in the context
+          login();
+
+          navigate("/"); // Redirect to home page after successful login
+        } else {
+          console.error("Token not found in response.");
+        }
+      } else {
+        console.error("Login failed:", await response.json());
       }
     } catch (error) {
       console.error("Network error:", error);
     }
-  }
+  };
 
-  async function loginUser() {
-    await allowUser(`/api/auth/login`);
-  }
-
-  async function loginSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const loginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await loginUser();
-  }
+    allowUser("/api/auth/login"); // Trigger the login process
+  };
 
   return (
     <DefaultLayout>

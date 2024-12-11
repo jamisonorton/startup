@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import {
@@ -13,7 +12,7 @@ import {
 import { link as linkStyles } from "@nextui-org/theme";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import { useAuth } from "../provider"; // Import useAuth hook
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
@@ -21,31 +20,10 @@ import { PianoIcon } from "@/components/icons";
 
 export const Navbar = () => {
   const navigate = useNavigate();
+  const { isLoggedIn, logout } = useAuth(); // Use isLoggedIn and logout from AuthContext
+  console.log(`Logged in`, isLoggedIn);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // Function to check login status
-  const checkLoginStatus = () => {
-    const token = Cookies.get("token"); // Retrieve the token from cookies
-
-    setIsLoggedIn(!!token); // Update state
-  };
-
-  useEffect(() => {
-    // Check login status on component mount
-    checkLoginStatus();
-
-    // Listen to storage changes for cross-tab sync
-    const handleStorageChange = () => checkLoginStatus();
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
-
-  // Logout handler
+  // Handle logout
   const handleLogout = async () => {
     try {
       const response = await fetch("/api/auth/logout", {
@@ -54,11 +32,11 @@ export const Navbar = () => {
       });
 
       if (response.ok) {
-        Cookies.remove("token"); // Remove the token from cookies
-        setIsLoggedIn(false); // Update state
-        navigate("/"); // Redirect to the home page
+        // On successful logout, remove token from cookies and update state
+        logout(); // Update the context's state (no need to manually update isLoggedIn)
+        navigate("/"); // Redirect to home page
       } else {
-        console.error("Failed to logout:", response.statusText);
+        console.error("Logout failed:", response.statusText);
       }
     } catch (error) {
       console.error("Logout failed:", error);
@@ -117,19 +95,19 @@ export const Navbar = () => {
 
       <NavbarContent className="sm:flex basis-1/5 sm:basis-full" justify="end">
         <NavbarItem className="sm:flex gap-2">
-          {!isLoggedIn ? (
+          {isLoggedIn ? (
+            <Button onClick={handleLogout} color="primary" variant="flat">
+              Logout
+            </Button>
+          ) : (
             <>
-              <Button as={Link} color="primary" href="/login" variant="flat">
+              <Button as={Link} href="/login" color="primary" variant="flat">
                 Login
               </Button>
-              <Button as={Link} color="primary" href="/register" variant="flat">
+              <Button as={Link} href="/register" color="primary" variant="flat">
                 Sign Up
               </Button>
             </>
-          ) : (
-            <Button color="primary" variant="flat" onClick={handleLogout}>
-              Logout
-            </Button>
           )}
           <ThemeSwitch />
         </NavbarItem>

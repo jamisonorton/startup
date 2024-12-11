@@ -42,8 +42,10 @@ apiRouter.post("/auth/create", async (req, res) => {
     // Set the cookie
     setAuthCookie(res, user.token);
 
+    // Send the token along with the response
     res.send({
       id: user._id,
+      token: user.token, // Include the token in the response body
     });
   }
 });
@@ -55,7 +57,14 @@ apiRouter.post("/auth/login", async (req, res) => {
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
       setAuthCookie(res, user.token);
-      res.send({ id: user._id });
+
+      console.log(`cookie`, user.token);
+
+      // Send the token along with the response
+      res.send({
+        id: user._id,
+        token: user.token, // Include the token in the response body
+      });
 
       return;
     }
