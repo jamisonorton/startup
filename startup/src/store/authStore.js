@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const API_URL = "http://startup.janesmusicstudio.com/api/auth";
+const API_URL = "https://startup.janesmusicstudio.com/api/auth";
 
 export const useAuthStore = create((set) => ({
   user: null,

@@ -3,9 +3,9 @@ import cors from "cors";
 import { connectToDatabase } from "./connection.js";
 import authRoutes from "./auth-route.js";
 import cookieParser from "cookie-parser";
-import peerProxy from "./peerProxy.js";
+import { setupWebSocket } from "./emailWebsocket.js";
 import dotenv from "dotenv";
-import http from "http"; // Import the http module
+import http from "http";
 
 dotenv.config({ path: "../.env" });
 
@@ -14,7 +14,7 @@ const PORT = process.env.PORT;
 const app = express();
 
 app.use(
-  cors({ origin: "http://startup.janesmusicstudio.com", credentials: true })
+  cors({ origin: "https://startup.janesmusicstudio.com", credentials: true })
 );
 
 // Middleware to parse JSON request bodies
@@ -29,12 +29,12 @@ app.use(express.static("public"));
 // Trust headers that are forwarded from the proxy so we can determine IP addresses
 app.set("trust proxy", true);
 
-app.use("/api/auth", authRoutes);
+app.use("/api", authRoutes);
 
 connectToDatabase();
 
 // Default error handler
-app.use(function (err, req, res) {
+app.use(function (err, req, res, next) {
   res.status(500).send({ type: err.name, message: err.message });
 });
 
@@ -47,7 +47,7 @@ app.use((_req, res) => {
 const httpServer = http.createServer(app);
 
 // Pass the HTTP server to peerProxy
-peerProxy(httpServer);
+setupWebSocket(httpServer);
 
 // Start the server
 httpServer.listen(PORT, () => {

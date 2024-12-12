@@ -4,12 +4,12 @@ import { verifyToken } from "./verifyToken.js";
 
 const router = express.Router();
 
-router.post("/signup", signup);
+router.post("/auth/signup", signup);
 
-router.post("/login", login);
+router.post("/auth/login", login);
 
-router.post("/logout", logout);
+router.post("/auth/logout", logout);
 
-router.get("/check-auth", verifyToken, checkAuth);
+router.get("/auth/check-auth", verifyToken, checkAuth);
 
 export default router;
