@@ -8,7 +8,6 @@ import CalendarPage from "@/pages/CalendarPage";
 import NavBar from "@/components/navbar";
 import { useAuthStore } from "@/store/authStore";
 import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
 
 const ProtectRoute = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
@@ -44,8 +43,7 @@ function App() {
 
   return (
     <div>
-      <NavBar />
-      {user && <Button onClick={handleLogout}>Logout</Button>}
+      <NavBar user={user} handleLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<IndexPage />} />
         <Route path="/about" element={<AboutPage />} />

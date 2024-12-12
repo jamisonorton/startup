@@ -49,7 +49,7 @@ I have added simon to my server and it works. I have also finished adding all of
 
 ## Startup Login
 
-All login and create logic work and send the data to mongodb. Creating a user sends the json to the janesmusicstudio database with a collection of user. It hashes the password.
+All login and create logic work and send the data to mongodb. Creating a user sends the json to the janesmusicstudio database with a collection of user. It hashes the password. The calendar page is a protected route and must have an account to view. The signup and login page are authenticateduserprotected page meaning if you try to access those then you will just be redirected to the homepage.
 
 ## Startup Websocket
 
