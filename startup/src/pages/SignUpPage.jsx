@@ -89,7 +89,11 @@ export default function SignUpPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button
+                  type="submit"
+                  className="bg-stone-700 w-full"
+                  disabled={isLoading}
+                >
                   {isLoading ? "Loading..." : "Sign Up"}
                 </Button>
               </motion.div>

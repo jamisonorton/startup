@@ -55,7 +55,9 @@ const PricingPage = () => {
         </p>
       </div>
       <div className="inline-block max-w-lg text-center justify-center">
-        <Button onClick={handleInterestClick}>I&apos;m Interested</Button>
+        <Button className="bg-stone-700" onClick={handleInterestClick}>
+          I&apos;m Interested
+        </Button>
       </div>
     </section>
   );

@@ -88,7 +88,7 @@ export default function LoginPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="bg-stone-700 w-full">
                   {isLoading ? "Loading..." : "Login"}
                 </Button>
               </motion.div>
