@@ -1,14 +1,14 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import IndexPage from "./pages/index";
-import AboutPage from "./pages/AboutPage";
-import PricingPage from "./pages/PricingPage";
-import SignUpPage from "./pages/SignUpPage";
-import LoginPage from "./pages/LoginPage";
-import CalendarPage from "./pages/CalendarPage";
-import NavBar from "./components/navbar";
-import { useAuthStore } from "./store/authStore";
+import IndexPage from "@/pages/index";
+import AboutPage from "@/pages/AboutPage";
+import PricingPage from "@/pages/PricingPage";
+import SignUpPage from "@/pages/SignUpPage";
+import LoginPage from "@/pages/LoginPage";
+import CalendarPage from "@/pages/CalendarPage";
+import NavBar from "@/components/navbar";
+import { useAuthStore } from "@/store/authStore";
 import { useEffect } from "react";
-import { Button } from "./components/ui/button";
+import { Button } from "@/components/ui/button";
 
 const ProtectRoute = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
