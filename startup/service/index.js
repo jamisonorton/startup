@@ -3,8 +3,7 @@ import cors from "cors";
 import { connectToDatabase } from "./db/connection.js";
 import authRoutes from "./routes/auth-route.js";
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 
 const PORT = process.env.PORT;
 
