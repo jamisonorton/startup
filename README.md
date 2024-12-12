@@ -50,3 +50,7 @@ I have added simon to my server and it works. I have also finished adding all of
 ## Startup Login
 
 All login and create logic work and send the data to mongodb. Creating a user sends the json to the janesmusicstudio database with a collection of user. It hashes the password.
+
+## Startup Websocket
+
+I updated my backend to support an emailWebsocket. It listens for a websocket connection. Then I added the frontend connection in the PricingPage. This connects to the websocket. I then created a email function using the button to send an email to my email if someone is interested in taking lessons. The email gets sent to my spam folder so I need to figure that out but functionality is there.
