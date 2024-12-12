@@ -1,14 +1,18 @@
 import express from "express";
 import cors from "cors";
-import { connectToDatabase } from "./db/connection.js";
-import authRoutes from "./routes/auth-route.js";
+import { connectToDatabase } from "./connection.js";
+import authRoutes from "./auth-route.js";
 import cookieParser from "cookie-parser";
-import "dotenv/config";
+import dotenv from "dotenv";
+
+dotenv.config({ path: "../.env" });
 
 const PORT = process.env.PORT;
 
 const app = express();
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(
+  cors({ origin: "http://startup.janesmusicstudio.com", credentials: true })
+);
 // Middleware to parse JSON request bodies
 app.use(express.json());
 app.use(cookieParser());
