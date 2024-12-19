@@ -8,6 +8,7 @@ const navigation = [
   { name: "About", href: "/about" },
   { name: "Pricing", href: "/pricing" },
   { name: "Calendar", href: "/calendar" },
+  { name: "Github", href: "https://github.com/jamisonorton/startup" },
 ];
 
 const userAuthenticationLinks = [
